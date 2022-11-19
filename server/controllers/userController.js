@@ -10,7 +10,7 @@ class UserController {
 
     async check(reg, res) {
         const query = reg.query
-        res.json(query)
+        res.json(query.id)
     }
 }
 
