@@ -9,7 +9,7 @@ const errorHandler = require('./middleware/ErrorHandleMiddleware')
 
 const PORT = process.env.PORT || 5000
 
-const app = express()
+const app = express()     //Фреймворк для создания сервера
 app.use(cors())           //Для запросов с браузера
 app.use(express.json())   //Для возможности парсить в JSON формате
 app.use('/api', router)
