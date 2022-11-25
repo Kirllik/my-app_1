@@ -1,4 +1,4 @@
-const {sequelize, Sequelize} = require('sequelize')
+const {Sequelize} = require('sequelize')
 
 module.exports = new Sequelize(         //Объект конфигурации коннекта
     process.env.DB_NAME,    //name-DB
