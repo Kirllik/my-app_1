@@ -1,6 +1,6 @@
 const uuid = require("uuid")
 const path = require("path");
-const {Device} = require('../models/models')
+const {Device, DeviceInfo} = require('../models/models')
 const ApiError = require("../error/ApiEror");
 
 class DeviceController {
@@ -18,7 +18,18 @@ class DeviceController {
 
             const device = await Device.create({name, price, brandId, typeId, img: fileName})
 
+            if (info) {  //Приходящие в теле запроса, через form-data данные они имеют тип <string>
+                info = JSON.parse(info) //Поэтому будем парсить перегоняя в JS объект
+                info.forEach(i =>    //бежим по массиву
+                    DeviceInfo.create({  //заполняем поля DeviceInfo
+                        specification: i.specification,
+                        description: i.description,
+                        deviceId: device.id
+                    })
+                )
+            }
             return res.json(device)
+
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }
@@ -49,7 +60,14 @@ class DeviceController {
     }
 
     async getOne(reg, res) {
-
+        const {id} = reg.params
+        const device = await Device.findOne(
+            {
+                where: {id},
+                include: [{model: DeviceInfo, as: 'info'}]
+            },
+        )
+        return res.json(device)
     }
 
     // async delete(reg, res) {

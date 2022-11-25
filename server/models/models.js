@@ -64,6 +64,9 @@ BasketDevice.belongsTo(Basket)
 Device.hasMany(BasketDevice)
 BasketDevice.belongsTo(Device)
 
+Device.hasMany((DeviceInfo, {as: 'info'}));  //Название поля у массива характеристик
+DeviceInfo.belongsTo(Device)
+
 Type.hasMany(Device)
 Device.belongsTo(Type)
 
@@ -73,7 +76,7 @@ Device.belongsTo(Brand)
 Type.belongsToMany(Brand, {through: TypeBrand})
 Brand.belongsToMany(Type, {through: TypeBrand})
 
-module.exports={
+module.exports = {
     User,
     Basket,
     BasketDevice,
