@@ -27,20 +27,23 @@ class DeviceController {
     }
 
     async getAll(reg, res) {
-        let {brandId, typeId} = reg.query
+        let {brandId, typeId, limit, page} = reg.query
+        page = page || 1    //если page = undefined то page=1
+        limit = limit || 2
+        let offset = page * limit - limit
         let devices;
 
         if (!brandId && !typeId) { //Нет бренда и нет типа
-            devices = await Device.findAll()
+            devices = await Device.findAndCountAll({limit, offset})
         }
         if (brandId && !typeId) {  //Есть только brandId
-            devices = await Device.findAll({where: {brandId}})
+            devices = await Device.findAndCountAll({where: {brandId}, limit, offset})
         }
         if (!brandId && typeId) {  //Есть только typeId
-            devices = await Device.findAll({where: {typeId}})
+            devices = await Device.findAndCountAll({where: {typeId}, limit, offset})
         }
         if (brandId && typeId) {   //Есть оба
-            devices = await Device.findAll({where: {typeId, brandId}})
+            devices = await Device.findAndCountAll({where: {typeId, brandId}, limit, offset})
         }
         return res.json(devices)
     }
