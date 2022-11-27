@@ -3,6 +3,14 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const {User, Basket} = require('../models/models')
 
+const generateJvt = (id, email, role) => {
+    return jwt.sign(
+        {id, email, role},
+        process.env.SECRET_KEY,
+        {expiresIn: '24'}
+    )
+}
+
 
 class UserController {
 
@@ -11,24 +19,33 @@ class UserController {
         if (!email || !password) {
             return next(apiError.badRequest("Не корректный email или password !"))
         }
-        const candidate = await User.findOne({where: {email}})
+        const candidate = await User.findOne({where: {email}})   //проверка в BD на наличие юзера с таким email
         if (candidate) {
             return next(apiError.badRequest("Пользователь с таким email уже существует"))
         }
-        const hashPassword = await bcrypt.hash(password, 5)
-        const user = await User.create({email, role, password: hashPassword})
-        const basket = await Basket.create({userId: user.id})
-        const token = jwt.sign(
-            {id: user.id, email, role},
-            process.env.SECRET_KEY,
-            {expiresIn: '24'}
-        )
-        return res.json({token})
+        // Eсли все проверки прошли
+        const hashPassword = await bcrypt.hash(password, 5)  // Хэш пароля
+        const user = await User.create({email, role, password: hashPassword}) // Пишем юзера в BD
+        const basket = await Basket.create({userId: user.id})    // Присваиваем юзеру корзину в BD
+        const token = generateJvt(user.id, user.email, user.role)   // Генерим узеру токен по данным регистрации
+        return res.json({token})  //Отсылаем токен в json формате на клиент
     }
 
-    async login(reg, res) {
-
+    async login(reg, res, next) {
+        const {email, password} = reg.body
+        const user = await User.findOne({where: {email}})
+        if (!user) {
+            return next(apiError.internal("Пользователь с таким email не найден"))
+        }
+        let comparePassword = bcrypt.compareSync(password, user.password) // Сравниваем пароль в запросе с паролем в BD найденного там юзера
+        if (!comparePassword) {     // Не совпадает?
+            return next(apiError.internal("Неверный пароль"))
+        }
+        // Eсли все проверки прошли
+        const token = generateJvt(user.id, user.email, user.role)  //Генерим токен
+        return res.json({token})     //Отсылаем токен в json формате на клиент
     }
+
 
     async check(reg, res, next) {
         const {id} = reg.query
