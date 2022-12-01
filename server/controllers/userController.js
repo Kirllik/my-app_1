@@ -7,15 +7,15 @@ const generateJvt = (id, email, role) => {
     return jwt.sign(
         {id, email, role},
         process.env.SECRET_KEY,
-        {expiresIn: '24'}
+        {expiresIn: '24h'}  //3 парам. это опции. В данном случае - время жизни токена
     )
 }
 
 
 class UserController {
 
-    async registration(reg, res, next) {
-        const {email, password, role} = reg.body
+    async registration(req, res, next) {
+        const {email, password, role} = req.body
         if (!email || !password) {
             return next(apiError.badRequest("Не корректный email или password !"))
         }
@@ -31,8 +31,8 @@ class UserController {
         return res.json({token})  //Отсылаем токен в json формате на клиент
     }
 
-    async login(reg, res, next) {
-        const {email, password} = reg.body
+    async login(req, res, next) {
+        const {email, password} = req.body
         const user = await User.findOne({where: {email}})
         if (!user) {
             return next(apiError.internal("Пользователь с таким email не найден"))
@@ -47,13 +47,10 @@ class UserController {
     }
 
 
-    async check(reg, res, next) {
-        const {id} = reg.query
-        console.log(reg.query.id)
-        if (!id) {
-            return next(apiError.badRequest("No id"))
-        }
-        res.json(id)
+    async check(req, res, next) {
+        const token = generateJvt(req.user.id, req.user.email, req.user.role) //Генерация нового токена
+        return res.json({token})
+        //return  res.json({message:"All right"}) // Для проверки
     }
 }
 
