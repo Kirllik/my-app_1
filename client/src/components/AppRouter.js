@@ -8,10 +8,10 @@ const AppRouter = () => {
     return (
         <Routes>
             {isAuth && privateRoutes.map(({path, Component}) =>
-                <Route key={path} path={path} element={Component} exact/>
+                <Route key={path} path={path} element={<Component/>} exact/>
             )}
             {publicRoutes.map(({path, Component}) =>
-                <Route key={path} path={path} element={Component} exact/>
+                <Route key={path} path={path} element={<Component/>} exact/>
             )}
         </Routes>
     );
