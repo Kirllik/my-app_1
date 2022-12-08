@@ -1,7 +1,8 @@
 import React, {useContext} from 'react';
-import {Routes, Route, NavLink} from 'react-router-dom';
+import {Routes, Route, Navigate} from 'react-router-dom';
 import {privateRoutes, publicRoutes} from "../routes";
 import {Context} from "../index";
+import {SHOP_ROUTE} from "../utils/consts";
 
 
 const AppRouter = () => {
@@ -16,6 +17,7 @@ const AppRouter = () => {
             {publicRoutes.map(({path, Component}) =>
                 <Route key={path} path={path} element={<Component/>} exact/>
             )}
+            <Route path='*' element={<Navigate to={SHOP_ROUTE}/>} /> /Redirect по новому
         </Routes>
     );
 };
