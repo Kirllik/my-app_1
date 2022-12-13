@@ -10,29 +10,24 @@ const NavBar = observer(() => {
     const {user} = useContext(Context)
     return (
         <Navbar bg="dark" variant="dark">
-          {/*  <Container>*/}
-                <NavLink to={SHOP_ROUTE} className={s.brand}>Auto_Components</NavLink>
-                {/*<Navbar.Brand  href='/' className={s.brand}>Auto Сomponents</Navbar.Brand>*/}
+            <Container>
+                <NavLink to={SHOP_ROUTE} style={{color:'white', textDecoration:'none', fontSize:'larger'}}>Auto_Components</NavLink>
 
-                <Form className={s.form}>
-                    <FormControl type="text" placeholder="Search"/>
-                    <Button variant="outline-info" className={s.button_search}>Search</Button>
-                </Form>
                 {user.isAuth ?
-                    <Nav className={s.nav}>
+                    <Nav className="ml-auto" style={{color:'white'}}>
                         <Button variant="outline-info">Админ панель</Button>
                         <Button variant="outline-info" className={s.button_1}>Войти</Button>
                     </Nav>
                     :
-                    <Nav className={s.nav}>
+                    <Nav className="ml-auto">
                         <Button
                             variant="outline-info"
-                            className={s.button_2}
+                            style={{color:'white'}}
                             onClick={() => user.setIsAuth(true)}>Авторизация
                         </Button>
                     </Nav>
                 }
-            {/*</Container>*/}
+            </Container>
         </Navbar>
     );
 });
