@@ -22,9 +22,6 @@ const NavBar = observer(() => {
                     <Nav className={s.nav}>
                         <Button variant="outline-info">Админ панель</Button>
                         <Button variant="outline-info" className={s.button_1}>Войти</Button>
-                        {/*<Nav.Link href='/'>Home</Nav.Link>
-                <Nav.Link href="#features">Features</Nav.Link>
-                <Nav.Link href="#pricing">Pricing</Nav.Link>*/}
                     </Nav>
                     :
                     <Nav className={s.nav}>
