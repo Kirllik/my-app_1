@@ -1,0 +1,33 @@
+.brand {
+    font-size:larger;
+    margin-left: 3%;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    margin-left: 5%;
+}
+
+.brand:hover{
+    color: #09de09
+}
+
+.nav{
+    color: white;
+    margin-left: 41%;
+}
+
+.button_1{
+margin: 6px;
+}
+
+.button_2{
+    margin-left: 73px;
+}
+
+.button_search {
+    margin-left: 5%;
+}
