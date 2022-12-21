@@ -3,7 +3,7 @@ import {Col} from "react-bootstrap";
 
 const DeviceItem = ({product}) => {
     return (
-        <Col md={4}>
+        <Col md={5}>
            Item
         </Col>
     );
