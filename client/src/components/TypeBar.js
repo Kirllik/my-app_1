@@ -2,7 +2,8 @@ import React, {useContext} from 'react';
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 import {ListGroup} from "react-bootstrap";
-const TypeBar = observer(() => {
+
+const TypeBar = observer(() => {  //Оборот компонента в observer для того чтоб mobx отслеживал изменения и перерендера
     const {device} = useContext(Context)
     return (
         <ListGroup>
@@ -18,7 +19,6 @@ const TypeBar = observer(() => {
                 </ListGroup.Item>
             )}
         </ListGroup>
-
     );
 });
 
