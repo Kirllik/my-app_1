@@ -12,7 +12,7 @@ export default class DeviceStore {
             {id: 1, name: "Nokian"},
             {id: 2, name: "Barum"},
             {id: 3, name: "Barum"},
-            {id: 4, name: "Barum"},
+            {id: 4, name: "Continental"},
             {id: 5, name: "Barum"},
             {id: 6, name: "Barum"},
             {id: 7, name: "Barum"},
