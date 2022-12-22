@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DeviceShop = () => {
+const ProductPaje = () => {
     return (
         <div>
           DEVICE PAGE
@@ -8,4 +8,4 @@ const DeviceShop = () => {
     );
 };
 
-export default DeviceShop;
+export default ProductPaje;

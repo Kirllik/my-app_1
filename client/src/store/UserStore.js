@@ -2,7 +2,7 @@ import {makeAutoObservable} from "mobx";
 
 export default class UserStore {
     constructor() {
-        this._isAuth = true
+        this._isAuth = false
         this._user = {}
         makeAutoObservable(this)  //Функция для перерендера компонентов при изменении отслеживаемых переменных this в конструкторе
     }
