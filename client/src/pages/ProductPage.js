@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProductPaje = () => {
+const ProductPage = () => {
     return (
         <div>
           DEVICE PAGE
@@ -8,4 +8,4 @@ const ProductPaje = () => {
     );
 };
 
-export default ProductPaje;
+export default ProductPage;
