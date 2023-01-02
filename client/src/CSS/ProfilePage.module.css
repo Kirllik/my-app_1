@@ -1,0 +1,38 @@
+
+.rating{
+    margin-left:50px;
+    display: flex;
+    align-items: center;
+}
+
+.div_corn{
+    margin-top: 25px;
+    padding-left: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.div_vlog{
+    display: flex;
+    padding-left: 100px;
+}
+
+.price{
+    display: flex;
+    align-items: center;
+    font-family: Arial, Tahoma, sans-serif;
+    color: #646464;
+    font-size: 20px;
+    width: 90px;
+    padding-left: 5px;
+}
+
+.cart{
+    padding-right: 60px;
+    padding-left: 13px;
+    width:40px;
+    height:40px;
+    background-color: #ffe289;
+    border-radius: 4px;
+    cursor:pointer;
+}
