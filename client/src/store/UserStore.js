@@ -16,6 +16,8 @@ export default class UserStore {
     }
 
     get isAuth() {        //Компютед функции (вызываются только тогда когда переменная была изменена (своего рода оптимизация))
+        console.log("Смена переменной")
+        console.log(this._isAuth)
         return this._isAuth
     }
 

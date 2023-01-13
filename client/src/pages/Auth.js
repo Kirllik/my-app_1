@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Button, Card, Container, Form} from "react-bootstrap";
 import {AUTH_ROUTE, REGISTRATION_ROUTE} from "../utils/consts";
 import {NavLink, useLocation} from "react-router-dom";
+import {Context} from "../index";
 
 const Auth = () => {
     const location = useLocation() //Для выуживания pathname из строки с URL
     const isLogin = location.pathname === AUTH_ROUTE
     console.log(location, isLogin);
+    const {user}=useContext(Context)
+    console.log(user)
 
     return (
         <Container
@@ -36,6 +39,7 @@ const Auth = () => {
                         }
                         <Button
                             variant={"outline-info"}
+                            onClick={()=>isLogin?user.setIsAuth(true):null}
                         >
                             {isLogin ? "Войти" : "Регистрация"}
                         </Button>

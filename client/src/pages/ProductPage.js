@@ -41,7 +41,7 @@ const ProductPage = () => {
                     <span className={s.price}>{device.price.toLocaleString('ru-RU')}</span> {/*Цена*/}
 
                     <a className={AdInCart ? `${s.basket} ${s.inbasket}` : s.basket} title={"Добавить в корзину"}
-                       onClick={() => {  {/*Если был клик на корзину, то роутим на страницу корзины, иначе переводим setAdInCart в true  */}
+                       onClick={() => {  {/*Если был клик на корзину, то роутим на страницу корзины, иначе переводим setAdInCart в false  */}
                            AdInCart ? navigate(BASKET_ROUTE) : setAdInCart(true)
                        }}
                     >
