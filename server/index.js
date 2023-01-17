@@ -10,6 +10,7 @@ const path = require("path");
 
 
 const PORT = process.env.PORT || 5000
+console.log(process.env.PORT)
 
 const app = express()     //Фреймворк для создания сервера
 app.use(cors())             //Для запросов с браузера
