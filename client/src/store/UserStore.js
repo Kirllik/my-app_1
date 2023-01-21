@@ -7,11 +7,12 @@ export default class UserStore {
         makeAutoObservable(this)  //Функция для перерендера компонентов при изменении отслеживаемых переменных this в конструкторе
     }
 
-    setIsAuth(bool) {     //Екшен (функция изменяющая состояние)
+    setIsAuth(bool) {     //action (функция изменяющая состояние)
         this._isAuth = bool
     }
 
     setUser(user) {
+        console.log("userStor = ",user)
         this._user = user
     }
 
