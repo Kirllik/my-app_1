@@ -1,6 +1,5 @@
 import {$host, $authHost} from "./index";
 import jwtDecode from "jwt-decode";
-import data from "bootstrap/js/src/dom/data";
 
 export const registration = async (email, password) => {
     /*console.log("registration  ", email, password)*/
@@ -11,16 +10,17 @@ export const registration = async (email, password) => {
 }
 
 export const login = async (email, password) => {
-    const {data} = await $host.post     //Метод запроса к бэку
-    (
-        'api/user/login',    //Урл запроса
-        {email, password}   //Данные отправляемые
-    )
+    const {data} = await $host.post   //Метод запроса к бэку
+        (
+            'api/user/login',     //Урл запроса
+            {email, password}    //Данные отправляемые
+        )
     localStorage.setItem('token', data.token)
     return jwtDecode(data.token)
 }
 
 export const check = async () => {
-    const response = await $host.post('api/user/auth')
-    return response
+    const {data} = await $authHost.get('api/user/auth')
+    localStorage.setItem('token', data.token)
+    return jwtDecode(data.token)
 }
