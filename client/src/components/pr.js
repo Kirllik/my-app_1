@@ -1,30 +1,34 @@
-import React, {useEffect, useState} from 'react';
-import {Container, Image, Spinner} from "react-bootstrap";
-import star from "../assets/star.svg";
-import s from "../CSS/PrоductPage.module.css"
+import React, {useEffect, useState} from "@types/react";
 import {useNavigate, useParams} from "react-router-dom";
+import {Container, Image} from "react-bootstrap";
+import s from "../CSS/PrоductPage.module.css";
+import star from "../assets/star.svg";
 import {BASKET_ROUTE} from "../utils/consts";
-import {fetchProductOne} from "../http/ProductAPI";
 
 const ProductPage = () => {
-
-    const {id} = useParams()
+    /* const device = {
+         id: 1,
+         name: "Nordman SX3",
+         price: 5000,
+         rating: 5,
+         img: 'https://img.exist.ru/img.jpg?Key=7981c580-72e7-47ea-bd14-35239db4029d_304&Size=1600x1400&MethodType=36'
+     }
+     const description = [
+         {id: 1, title: "Диаметр", description: 17},
+         {id: 2, title: "Размерность", description: "205/50"},
+         {id: 3, title: "Индекс нагрузки ", description: 93},
+         {id: 4, title: "Индекс скорости ", description: "V"},
+     ]*/
 
     const [device, setDevice] = useState({info: []})
+    const {id} = useParams()
 
-    const [addInCart, setAdInCart] = useState(false)
+    const [AdInCart, setAdInCart] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetchProductOne(id).then(data => setDevice(data))
-    }, [])
 
-    console.log("device = ", device)
-
-    if (device.price === undefined) {
-        console.log("true")
-        return <div className={s.center}><Spinner animation="border" variant="primary"/></div>
-    }
+    })
 
     return (
         <Container className="mt-4">
@@ -38,20 +42,18 @@ const ProductPage = () => {
             </div>
 
             <div className={s.div_corn}>
-                <Image width={300} height={300}
-                       src={process.env.REACT_APP_API_URL + device.img}/> {/*//Изображение товара*/}
+                <Image width={300} height={300} src={process.env.REACT_APP_API_URL + device.img}/> {/*Изображение товара*/}
                 <div className={s.div_vlog}>
                     <span className={s.price}>{device.price.toLocaleString('ru-RU')}</span> {/*Цена*/}
 
-                    <a className={addInCart ? `${s.basket} ${s.inbasket}` : s.basket}
-                       title={addInCart ? "Перейти в корзину" : "Добавить в корзину"}
+                    <a className={AdInCart ? `${s.basket} ${s.inbasket}` : s.basket} title={"Добавить в корзину"}
                        onClick={() => {
                            {/*Если был клик на корзину, то роутим на страницу корзины, иначе переводим setAdInCart в false  */
                            }
-                           addInCart ? navigate(BASKET_ROUTE) : setAdInCart(true)
+                           AdInCart ? navigate(BASKET_ROUTE) : setAdInCart(true)
                        }}
                     >
-                        {addInCart ? <i className={s.i}>1</i> : <></>}
+                        {AdInCart ? <i className={s.i}>1</i> : <></>}
                     </a>
                 </div>
             </div>

@@ -4,7 +4,7 @@ import s from '../CSS/PrоductPage.module.css'
 const Basket = () => {
     return (
        <div>
-           hjhjhj
+          <h1 style={{display:"flex", justifyContent:"center"}}>Basket</h1>
        </div>
     );
 };

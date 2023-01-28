@@ -13,13 +13,11 @@ const App = observer(() => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        setTimeout(() => {   //Имитация плохого соединения
-            check().then(data => {  //Если функция check() успешна, в методе .then(меняем состояния в сторе)
-                console.log("data= ", data)
-                user.setUser(true)
-                user.setIsAuth(true)
-            }).finally(() => setLoading(false))  //и вне зависимости от успешности или нет функции check(), исполняем метод .finally
-        }, 1000)
+        check().then(data => {  //Если функция check() успешна, в методе .then(меняем состояния в сторе)
+            console.log("data= ", data)
+            user.setUser(true)
+            user.setIsAuth(true)
+        }).finally(() => setLoading(false))  //и вне зависимости от успешности или нет функции check(), исполняем метод .finally
     }, [])
 
     if (loading) {

@@ -40,7 +40,7 @@ class DeviceController {
     async getAll(reg, res) {
         let {brandId, typeId, limit, page} = reg.query
         page = page || 1    //если page = undefined то page=1
-        limit = limit || 2
+        limit = limit || 10
         let offset = page * limit - limit
         let devices;
 

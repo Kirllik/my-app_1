@@ -92,3 +92,8 @@
     font-size: 17px;
 
 }
+.center {
+    display: flex;
+    justify-content: center;
+    margin-top: 35%;
+}

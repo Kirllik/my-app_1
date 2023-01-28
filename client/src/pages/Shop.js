@@ -3,19 +3,18 @@ import TypeBar from "../components/TypeBar";
 import {Col, Container, Row} from "react-bootstrap";
 import BrandBar from "../components/BrandBar";
 import ProductList from "../components/ProductList";
-import {observer} from "mobx-react-lite";
-import {fetchBrands, fetchProducts, fetchTypes} from "../http/ProductAPI";
 import {Context} from "../index";
-import data from "bootstrap/js/src/dom/data";
+import {fetchBrands, fetchProducts, fetchTypes} from "../http/ProductAPI";
+import {observer} from "mobx-react-lite";
 
 const Shop = observer(() => {
     const {device} = useContext(Context)
 
     useEffect(() => {
         fetchTypes().then(data => device.setTypes(data))
-        fetchBrands().then(data=>device.setBrands(data))
-
-    })
+        fetchBrands().then(data => device.setBrands(data))
+        fetchProducts().then(data => device.setProducts(data.rows))
+    },[])
 
     return (
         <Container>
